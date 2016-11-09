@@ -19,15 +19,15 @@
       <h1>
 <a id="meilinv77githubio" class="anchor" href="#meilinv77githubio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Meilinv77.github.io</h1>
 
-<p>77博客
-                                                    Portal初始
-    &nbsp;&nbsp;&nbsp;&nbsp;最近遇到了项目上接触到Portal，我们产品使用JetSpeed作为Portal的实现。于是自己研究了下Jetspeed。
-    首先学一门新东西需要知道他能用来做什么：Jetspeed是基于Web的应用，通常提供个性化，单点登录，整合不同资源的综合信息展示平台。其他的定义就不在赘述了，值得一提的是Jetspeed能把系统做成类似客户端的桌面系统，用户体验效果不错。
+<p>
+                                                    Portal初始<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;最近遇到了项目上接触到Portal，我们产品使用JetSpeed作为Portal的实现。于是自己研究了下Jetspeed。<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; 首先学一门新东西需要知道他能用来做什么：Jetspeed是基于Web的应用，通常提供个性化，单点登录，整合不同资源的综合信息展示平台。其他的定义就不在赘述了，值得一提的是Jetspeed能把系统做成类似客户端的桌面系统，用户体验效果不错。
     从JSR168规范来看Jetspeed主要实现了Portal--Portlet Container--Portlet概念中的Portal。它是连接用户与各个模块组件的桥梁。整个调用流程再次不在详解，项目文档中也已经说的十分详细。这里主要谈谈Jetspeed的核心组件。结合着Jetspeed架构图已经源代码先把Jetspeed核心组件抛出来。<br>
-    1).Engine<br/>
-    2).Container<br/>
-    3). Pipeline<br/>
-    4).Valve<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;1).Engine<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;2).Container<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;3). Pipeline<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4).Valve<br/>
    &nbsp;&nbsp;&nbsp;&nbsp; Engine是整个项目的核心。从源码包中可以看到它里面主要包含两个类 <br/>
         <img alt="">
 其中JetspeedServlet是整个框架的入口。项目启动会立即执行JetspeedServlet，在其init方法中进行JetspeedEngine的初始化工作，即engine = new JetspeedEngine(properties, applicationRoot, config, initializeComponentManager(config, applicationRoot, properties));
