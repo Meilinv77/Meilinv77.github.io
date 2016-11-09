@@ -16,7 +16,7 @@
     </section>
 
     <section class="main-content">
-      <p>Portal初识</br>
+      <p>Portal初识</br></br></br>
 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近遇到了项目上接触到Portal，我们产品使用JetSpeed作为Portal的实现。于是自己研究了下Jetspeed。</br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先学一门新东西需要知道他能用来做什么：Jetspeed是基于Web的应用，通常提供个性化，单点登录，
@@ -28,12 +28,12 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2).Container</br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3).Pipeline</br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4).Valve</br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Engine是整个项目的核心。从源码包中可以看到它里面主要包含两个类 </br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Engine是整个项目的核心。从源码包中可以看到它里面主要包含两个类 </br></br>
   
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.apache.jetspeed.engine.JetspeedEngine </br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.apache.jetspeed.engine.JetspeedServlet </br>
   </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中JetspeedServlet是整个框架的入口。项目启动会立即执行JetspeedServlet，在其init方法中进行JetspeedEngine的初始化工作，</br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中JetspeedServlet是整个框架的入口。项目启动会立即执行JetspeedServlet，在其init方法中进行JetspeedEngine的初始化工作，
   即engine = new JetspeedEngine(properties, applicationRoot, config, initializeComponentManager(config, applicationRoot, properties));
 然后用户就可以通过http协议来呼叫JetspeedEngine的service方法去进行交互。其实service所做的具体工作就是根据请求中的参数调用各个管道JetspeedPipeline接下来说下管道。
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JetspeedPipeline按照设计模式中职责链模式设计，它其实就跟Servlet中的Filter很类似。从代码中可以看出它的实现也是利用了Java的反射机制</p>
