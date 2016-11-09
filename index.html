@@ -16,23 +16,28 @@
     </section>
 
     <section class="main-content">
-      <pre>Portal初识
+      <p>Portal初识
 
     最近遇到了项目上接触到Portal，我们产品使用JetSpeed作为Portal的实现。于是自己研究了下Jetspeed。
-首先学一门新东西需要知道他能用来做什么：Jetspeed是基于Web的应用，通常提供个性化，单点登录，整合不同资源的综合信息展示平台。其他的定义就不在赘述了，值得一提的是Jetspeed能把系统做成类似客户端的桌面系统，用户体验效果不错。
-从JSR168规范来看Jetspeed主要实现了Portal--Portlet Container--Portlet概念中的Portal。它是连接用户与各个模块组件的桥梁。整个调用流程再次不在详解，项目文档中也已经说的十分详细。这里主要谈谈Jetspeed的核心组件。结合着Jetspeed架构图已经源代码先把Jetspeed核心组件抛出来。      
-1).Engine
-2).Container
-3). Pipeline
-4).Valve
-Engine是整个项目的核心。从源码包中可以看到它里面主要包含两个类 
-</pre>
-
+    首先学一门新东西需要知道他能用来做什么：Jetspeed是基于Web的应用，通常提供个性化，单点登录，
+整合不同资源的综合信息展示平台。其他的定义就不在赘述了，值得一提的是Jetspeed能把系统做成类似客户端的桌面系统，用户体验效果不错。
+从JSR168规范来看Jetspeed主要实现了Portal--Portlet Container--Portlet概念中的Portal。
+它是连接用户与各个模块组件的桥梁。整个调用流程再次不在详解，项目文档中也已经说的十分详细。
+这里主要谈谈Jetspeed的核心组件。结合着Jetspeed架构图已经源代码先把Jetspeed核心组件抛出来。      
+  1).Engine
+  2).Container
+  3). Pipeline
+  4).Valve
+  Engine是整个项目的核心。从源码包中可以看到它里面主要包含两个类 
+  
+  org.apache.jetspeed.engine.JetspeedEngine 
+  org.apache.jetspeed.engine.JetspeedServlet 
+  </p>
 <p>其中JetspeedServlet是整个框架的入口。项目启动会立即执行JetspeedServlet，在其init方法中进行JetspeedEngine的初始化工作，即engine = new JetspeedEngine(properties, applicationRoot, config, initializeComponentManager(config, applicationRoot, properties));
 然后用户就可以通过http协议来呼叫JetspeedEngine的service方法去进行交互。其实service所做的具体工作就是根据请求中的参数调用各个管道JetspeedPipeline接下来说下管道。
     JetspeedPipeline按照设计模式中职责链模式设计，它其实就跟Servlet中的Filter很类似。从代码中可以看出它的实现也是利用了Java的反射机制</p>
+    <pre><code>
     public void invoke(RequestContext request) throws PipelineException
-   <pre><code>
       {
         try
         {
@@ -67,10 +72,9 @@ Engine是整个项目的核心。从源码包中可以看到它里面主要包�
         }
     }
     </code></pre>
+<p>
 JetspeedPipeline传递了RequestContext将具体的业务处理交给了各个阀门Valve，每个阀门处理完在将处理后的信息塞到RequestContext参数中如果有下一个阀门等待处理再去调用下一个。JetspeedPipeline中内置了 
-
-
-<p>这15个阀门。如果我们想扩展自己的阀门非常Easy只需要实现org.apache.jetspeed.pipeline.valve.Valve接口，然后在管道中我们可以通过调用
+15个阀门。如果我们想扩展自己的阀门非常Easy只需要实现org.apache.jetspeed.pipeline.valve.Valve接口，然后在管道中我们可以通过调用
     void addValve(Valve valve); 去增加一个新的阀门
     void invoke(RequestContext context) 来调用下一个阀门
 阀门调用过程中可能会与Container交互去处理相关的Portlet，最后一个阀门调用结束将处理结果返回Pipeline,回写给用户。需要强调的是这里的Container并不是Web容器，它是Portlet容器。
